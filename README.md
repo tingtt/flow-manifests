@@ -15,6 +15,16 @@ vim 1_secret.yaml
 make apply
 ```
 
+### Use ingress-nginx
+
+```bash
+# Copy ingress manifest
+cp 9_ingress.yaml.org 9_ingress.yaml
+
+# apply
+make apply
+```
+
 ## Service sources
 
 - [flow / flow-users](https://gitlab.tingtt.jp/flow/flow-users)
