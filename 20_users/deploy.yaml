@@ -1,0 +1,144 @@
+# https://kubernetes.io/docs/concepts/workloads/controllers/deployment/
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flow-users
+  namespace: flow
+  labels:
+    app: flow-users
+spec:
+  selector:
+    matchLabels:
+      app: flow-users
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: flow-users
+    spec:
+      containers:
+        - name: flow-users
+          image: registry.tingtt.jp/flow/flow-users:latest
+          imagePullPolicy: Always
+          resources:
+            requests:
+              cpu: 100m
+              memory: 100Mi
+            limits:
+              cpu: 100m
+              memory: 100Mi
+          livenessProbe:
+            tcpSocket:
+              port: 1323
+            initialDelaySeconds: 5
+            timeoutSeconds: 5
+            successThreshold: 1
+            failureThreshold: 3
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /-/readiness
+              port: 1323
+            initialDelaySeconds: 5
+            timeoutSeconds: 2
+            successThreshold: 1
+            failureThreshold: 3
+            periodSeconds: 10
+          env:
+            - name: JWT_ISSUER
+              valueFrom:
+                secretKeyRef:
+                  name: flow-jwt
+                  key: JWT_ISSUER
+                  optional: false
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: flow-jwt
+                  key: JWT_SECRET
+                  optional: false
+            - name: MYSQL_DATABASE
+              valueFrom:
+                secretKeyRef:
+                  name: flow-mysql
+                  key: MYSQL_DATABASE
+                  optional: false
+            - name: MYSQL_USER
+              valueFrom:
+                secretKeyRef:
+                  name: flow-mysql
+                  key: MYSQL_USER
+                  optional: false
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: flow-mysql
+                  key: MYSQL_PASSWORD
+                  optional: false
+            - name: MYSQL_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: flow-mysql
+                  key: MYSQL_HOST
+                  optional: false
+            - name: LOG_LEVEL
+              valueFrom:
+                secretKeyRef:
+                  name: flow-env
+                  key: LOG_LEVEL
+                  optional: true
+            - name: GZIP_LEVEL
+              valueFrom:
+                secretKeyRef:
+                  name: flow-env
+                  key: GZIP_LEVEL
+                  optional: true
+            - name: ARG
+              valueFrom:
+                secretKeyRef:
+                  name: flow-args
+                  key: ARG
+                  optional: true
+            - name: ARG1
+              valueFrom:
+                secretKeyRef:
+                  name: flow-args
+                  key: ARG1
+                  optional: true
+            - name: ARG2
+              valueFrom:
+                secretKeyRef:
+                  name: flow-args
+                  key: ARG2
+                  optional: true
+          args:
+            - "$(ARG)"
+            - "$(ARG1)"
+            - "$(ARG2)"
+          ports:
+            - containerPort: 1323
+              name: flow-users
+      restartPolicy: Always
+---
+# https://kubernetes.io/docs/concepts/services-networking/service/
+apiVersion: v1
+kind: Service
+metadata:
+  name: flow-users
+  namespace: flow
+spec:
+  selector:
+    app: flow-users
+  type: ClusterIP
+  ports:
+    - name: flow-users
+      protocol: TCP
+      port: 1323
+      targetPort: 1323
+---
+
