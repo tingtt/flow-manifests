@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
         - name: flow-pomodoro
-          image: registry.tingtt.jp/flow/flow-pomodoro:latest
+          image: registry.tingtt.jp/flow/flow-pomodoro:v1.0.1-582
           imagePullPolicy: Always
           resources:
             requests:

@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
         - name: flow-documents
-          image: registry.tingtt.jp/flow/flow-documents:latest
+          image: registry.tingtt.jp/flow/flow-documents:v1.0.1-586
           imagePullPolicy: Always
           resources:
             requests:

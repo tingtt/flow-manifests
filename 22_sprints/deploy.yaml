@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
         - name: flow-sprints
-          image: registry.tingtt.jp/flow/flow-sprints:latest
+          image: registry.tingtt.jp/flow/flow-sprints:v1.0.3-576
           imagePullPolicy: Always
           resources:
             requests:
