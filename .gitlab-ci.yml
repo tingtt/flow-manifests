@@ -1,0 +1,36 @@
+stages:
+  - delivery
+  - gitops
+
+push-github:
+  stage: delivery
+  only:
+    - main
+    - latest
+    - tags
+  except:
+    - /^flow-.*\/v.*$/
+  before_script:
+    - eval "$(ssh-agent -s)"
+    - echo "$GITHUB_SSH_SECRET" | tr -d '\r' | ssh-add -
+    - git config --local user.name "$GITHUB_USER"
+    - git config --local user.email "$GITHUB_EMAIL"
+    - git remote add github "$GITHUB_REMOTE_URL" || true
+  script:
+    - git checkout $CI_COMMIT_REF_NAME
+    - git pull origin $CI_COMMIT_REF_NAME -r
+    - git push github $CI_COMMIT_REF_NAME -f --tags
+
+open-mr:
+  stage: gitops
+  only:
+    - /^flow-.*\/v.*$/
+  script:
+    - |
+      HOST=$CI_PROJECT_URL \
+      GITLAB_USER_ID=$GITLAB_USER_ID \
+      PRIVATE_TOKEN=$PRIVATE_TOKEN \
+      CI_PROJECT_ID=$CI_PROJECT_ID \
+      CI_COMMIT_REF_NAME=$CI_COMMIT_REF_NAME \
+      MR_TITLE=$(echo -n "[update] $CI_COMMIT_REF_NAME" | sed 's/\// to /') \
+      sh openMR.sh
