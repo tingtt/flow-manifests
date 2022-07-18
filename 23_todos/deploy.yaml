@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
         - name: flow-todos
-          image: registry.tingtt.jp/flow/flow-todos:v1.0.1-580
+          image: registry.tingtt.jp/flow/flow-todos:v1.1.0
           imagePullPolicy: Always
           resources:
             requests:
