@@ -6,13 +6,7 @@ test:
 
 .PHONY: apply
 apply: test
-	ls *.yaml | while read line; do \
-		kubectl apply -f $$line; \
-	done
-	ls -d 2* | while read line; do \
-		kubectl apply -R -f $$line; \
-		kubectl wait pods -n flow --all --for condition=ready; \
-	done
+	kubectl apply -R -f .
 
 .PHONY: delete
 delete: test
