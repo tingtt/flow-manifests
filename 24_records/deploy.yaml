@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
         - name: flow-records
-          image: registry.tingtt.jp/flow/flow-records:v1.0.1-584
+          image: registry.tingtt.jp/flow/flow-records:v1.1.0
           imagePullPolicy: Always
           resources:
             requests:
