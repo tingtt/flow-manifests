@@ -27,7 +27,7 @@ open-mr:
     - /^flow-.*\/v.*$/
   script:
     - |
-      HOST=$CI_PROJECT_URL \
+      HOST=$CI_SERVER_URL \
       GITLAB_USER_ID=$GITLAB_USER_ID \
       PRIVATE_TOKEN=$PRIVATE_TOKEN \
       CI_PROJECT_ID=$CI_PROJECT_ID \

@@ -18,12 +18,12 @@ BODY="{
 
 # Require a list of all the merge request and take a look if there is already
 # one with the same source branch
-LISTMR=`curl --silent "${HOST}${CI_PROJECT_ID}/merge_requests?state=opened" --header "PRIVATE-TOKEN:${PRIVATE_TOKEN}"`;
+LISTMR=`curl --fail --silent "${HOST}/api/v4/projects/${CI_PROJECT_ID}/merge_requests?state=opened" --header "PRIVATE-TOKEN:${PRIVATE_TOKEN}"`;
 COUNTBRANCHES=`echo ${LISTMR} | grep -o "\"source_branch\":\"${CI_COMMIT_REF_NAME}\"" | wc -l`;
 
 # No MR found, let's create a new one
 if [ ${COUNTBRANCHES} -eq "0" ]; then
-    curl -X POST "${HOST}${CI_PROJECT_ID}/merge_requests" \
+    curl --fail -X POST "${HOST}/api/v4/projects/${CI_PROJECT_ID}/merge_requests" \
         --header "PRIVATE-TOKEN:${PRIVATE_TOKEN}" \
         --header "Content-Type: application/json" \
         --data "${BODY}";
