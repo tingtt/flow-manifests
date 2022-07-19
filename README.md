@@ -18,9 +18,14 @@ make apply
 ### Use ingress-nginx
 
 ```bash
-# Copy ingress manifest
-cp 9_ingress.yaml.org 9_ingress.yaml
+# Copy ingress manifest template
+cp 9_ingress.yaml.template 9_ingress.yaml
 
+# Edit host
+vim 9_ingress.yaml
+```
+
+```bash
 # apply
 make apply
 ```

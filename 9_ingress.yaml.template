@@ -13,10 +13,10 @@ metadata:
 spec:
   tls:
     - hosts:
-        - flow.tingtt.jp
+        - flow.example.com
       secretName: flow-tls-secret
   rules:
-    - host: flow.tingtt.jp
+    - host: flow.example.com
       http:
         paths:
           - pathType: Prefix
@@ -26,7 +26,7 @@ spec:
                 name: flow-frontend
                 port:
                   name: http
-    - host: api-flow.tingtt.jp
+    - host: api-flow.example.com
       http:
         paths:
           - pathType: Prefix
@@ -43,7 +43,7 @@ spec:
                 name: flow-users
                 port:
                   number: 1323
-    - host: api-flow.tingtt.jp
+    - host: api-flow.example.com
       http:
         paths:
           - pathType: Prefix
@@ -60,7 +60,7 @@ spec:
                 name: flow-projects
                 port:
                   number: 1323
-    - host: api-flow.tingtt.jp
+    - host: api-flow.example.com
       http:
         paths:
           - pathType: Prefix
@@ -77,7 +77,7 @@ spec:
                 name: flow-sprints
                 port:
                   number: 1323
-    - host: api-flow.tingtt.jp
+    - host: api-flow.example.com
       http:
         paths:
           - pathType: Prefix
@@ -94,7 +94,7 @@ spec:
                 name: flow-todos
                 port:
                   number: 1323
-    - host: api-flow.tingtt.jp
+    - host: api-flow.example.com
       http:
         paths:
           - pathType: Prefix
@@ -111,7 +111,7 @@ spec:
                 name: flow-pomodoro
                 port:
                   number: 1323
-    - host: api-flow.tingtt.jp
+    - host: api-flow.example.com
       http:
         paths:
           - pathType: Prefix
@@ -128,7 +128,7 @@ spec:
                 name: flow-records
                 port:
                   number: 1323
-    - host: api-flow.tingtt.jp
+    - host: api-flow.example.com
       http:
         paths:
           - pathType: Prefix
@@ -145,7 +145,7 @@ spec:
                 name: flow-documents
                 port:
                   number: 1323
-    - host: api-flow.tingtt.jp
+    - host: api-flow.example.com
       http:
         paths:
           - pathType: Prefix
