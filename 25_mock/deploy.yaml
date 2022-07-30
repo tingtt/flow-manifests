@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
         - name: flow-mock
-          image: registry.tingtt.jp/flow/flow-mock:v1.1.0
+          image: registry.tingtt.jp/flow/flow-mock:v1.1.1
           imagePullPolicy: Always
           resources:
             requests:
