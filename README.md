@@ -32,6 +32,7 @@ make apply
 
 ## Service sources
 
+- [flow / frontend](https://gitlab.tingtt.jp/flow/frontend)
 - [flow / flow-users](https://gitlab.tingtt.jp/flow/flow-users)
 - [flow / flow-projects](https://gitlab.tingtt.jp/flow/flow-projects)
 - [flow / flow-sprints](https://gitlab.tingtt.jp/flow/flow-sprints)

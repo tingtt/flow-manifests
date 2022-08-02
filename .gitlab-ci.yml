@@ -9,7 +9,7 @@ push-github:
     - latest
     - tags
   except:
-    - /^flow-.*\/v.*$/
+    - /^.*\/v.*$/
   before_script:
     - eval "$(ssh-agent -s)"
     - echo "$GITHUB_SSH_SECRET" | tr -d '\r' | ssh-add -
@@ -24,7 +24,7 @@ push-github:
 open-mr:
   stage: gitops
   only:
-    - /^flow-.*\/v.*$/
+    - /^.*\/v.*$/
   script:
     - |
       HOST=$CI_SERVER_URL \

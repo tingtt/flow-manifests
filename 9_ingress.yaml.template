@@ -9,7 +9,7 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/use-regex: "true"
-    nginx.ingress.kubernetes.io/rewrite-target: /$1
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
 spec:
   tls:
     - hosts:
@@ -20,143 +20,66 @@ spec:
       http:
         paths:
           - pathType: Prefix
-            path: "/(.*)"
+            path: "/()(.*)"
             backend:
               service:
                 name: flow-frontend
                 port:
-                  name: http
+                  number: 3000
     - host: api-flow.example.com
       http:
         paths:
           - pathType: Prefix
-            path: "/users/(.*)"
+            path: "/users(/|$)(.*)"
             backend:
               service:
                 name: flow-users
                 port:
                   number: 1323
-          - pathType: Exact
-            path: "/users$"
-            backend:
-              service:
-                name: flow-users
-                port:
-                  number: 1323
-    - host: api-flow.example.com
-      http:
-        paths:
           - pathType: Prefix
-            path: "/projects/(.*)"
+            path: "/projects(/|$)(.*)"
             backend:
               service:
                 name: flow-projects
                 port:
                   number: 1323
-          - pathType: Exact
-            path: "/projects$"
-            backend:
-              service:
-                name: flow-projects
-                port:
-                  number: 1323
-    - host: api-flow.example.com
-      http:
-        paths:
           - pathType: Prefix
-            path: "/sprints/(.*)"
+            path: "/sprints(/|$)(.*)"
             backend:
               service:
                 name: flow-sprints
                 port:
                   number: 1323
-          - pathType: Exact
-            path: "/sprints$"
-            backend:
-              service:
-                name: flow-sprints
-                port:
-                  number: 1323
-    - host: api-flow.example.com
-      http:
-        paths:
           - pathType: Prefix
-            path: "/todos/(.*)"
+            path: "/todos(/|$)(.*)"
             backend:
               service:
                 name: flow-todos
                 port:
                   number: 1323
-          - pathType: Exact
-            path: "/todos$"
-            backend:
-              service:
-                name: flow-todos
-                port:
-                  number: 1323
-    - host: api-flow.example.com
-      http:
-        paths:
           - pathType: Prefix
-            path: "/pomodoro/(.*)"
+            path: "/pomodoro(/|$)(.*)"
             backend:
               service:
                 name: flow-pomodoro
                 port:
                   number: 1323
-          - pathType: Exact
-            path: "/pomodoro$"
-            backend:
-              service:
-                name: flow-pomodoro
-                port:
-                  number: 1323
-    - host: api-flow.example.com
-      http:
-        paths:
           - pathType: Prefix
-            path: "/records/(.*)"
+            path: "/records(/|$)(.*)"
             backend:
               service:
                 name: flow-records
                 port:
                   number: 1323
-          - pathType: Exact
-            path: "/records$"
-            backend:
-              service:
-                name: flow-records
-                port:
-                  number: 1323
-    - host: api-flow.example.com
-      http:
-        paths:
           - pathType: Prefix
-            path: "/documents/(.*)"
+            path: "/documents(/|$)(.*)"
             backend:
               service:
                 name: flow-documents
                 port:
                   number: 1323
-          - pathType: Exact
-            path: "/documents$"
-            backend:
-              service:
-                name: flow-documents
-                port:
-                  number: 1323
-    - host: api-flow.example.com
-      http:
-        paths:
           - pathType: Prefix
-            path: "/mock/(.*)"
-            backend:
-              service:
-                name: flow-mock
-                port:
-                  number: 1323
-          - pathType: Exact
-            path: "/mock$"
+            path: "/mock(/|$)(.*)"
             backend:
               service:
                 name: flow-mock
