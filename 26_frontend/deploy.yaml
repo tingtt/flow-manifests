@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
         - name: flow-frontend
-          image: registry.tingtt.jp/flow/frontend:v0.1.3
+          image: registry.tingtt.jp/flow/frontend:v0.2.1
           imagePullPolicy: Always
           resources:
             requests:
