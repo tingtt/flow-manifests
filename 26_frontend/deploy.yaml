@@ -55,7 +55,6 @@ spec:
                 secretKeyRef:
                   name: flow-service-url
                   key: NEXT_PUBLIC_API_URL
-                  optional: true
           ports:
             - containerPort: 3000
               name: flow-frontend
