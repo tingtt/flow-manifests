@@ -61,4 +61,20 @@ spec:
               name: flow-frontend
       restartPolicy: Always
 ---
+# https://kubernetes.io/docs/concepts/services-networking/service/
+apiVersion: v1
+kind: Service
+metadata:
+  name: flow-frontend
+  namespace: flow
+spec:
+  selector:
+    app: flow-frontend
+  type: ClusterIP
+  ports:
+    - name: flow-frontend
+      protocol: TCP
+      port: 3000
+      targetPort: 3000
+---
 
